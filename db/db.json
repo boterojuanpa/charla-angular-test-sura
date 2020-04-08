@@ -1,0 +1,16 @@
+{
+  "productos": [
+    {
+      "id": 1,
+      "descripcion": "Arroz"
+    },
+    {
+      "id": "2",
+      "descripcion": "Carne"
+    },
+    {
+      "id": "5",
+      "descripcion": "Azucar"
+    }
+  ]
+}
