@@ -1,16 +1,38 @@
 {
   "productos": [
     {
-      "id": 1,
-      "descripcion": "Arroz"
+      "id": "1",
+      "descripcion": "Carne",
+      "precio": "10000",
+      "aplicaIva": true
     },
     {
       "id": "2",
-      "descripcion": "Carne"
+      "descripcion": "Papa",
+      "precio": "1200",
+      "aplicaIva": true
     },
     {
-      "id": "5",
-      "descripcion": "Azucar"
+      "id": "23",
+      "descripcion": "Agua",
+      "precio": "1500",
+      "aplicaIva": true,
+      "valorIva": 285
+    },
+    {
+      "id": "27",
+      "descripcion": "Azucar",
+      "precio": "1700",
+      "aplicaIva": true,
+      "valorIva": 323
+    },
+    {
+      "id": "36",
+      "descripcion": "Panela",
+      "precio": "6500",
+      "aplicaIva": true,
+      "valorIva": 1235,
+      "canastaBasica": false
     }
   ]
 }

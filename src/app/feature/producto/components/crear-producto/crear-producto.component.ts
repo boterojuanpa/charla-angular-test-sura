@@ -17,15 +17,23 @@ export class CrearProductoComponent implements OnInit {
   }
 
   crear() {
-    this.productoServices.guardar(this.productoForm.value).subscribe((data)=>{
+
+    const productoFormValue: Producto = this.productoForm.value as Producto;
+
+    this.productoServices.guardar(new Producto(productoFormValue.id, productoFormValue.descripcion, productoFormValue.precio, productoFormValue.aplicaIva, productoFormValue.canastaBasica)).subscribe((data) => {
       alert("producto creado")
+    }, (error) => {
+      alert("error " + error)
     });
   }
 
   private construirFormularioProducto() {
     this.productoForm = new FormGroup({
       id: new FormControl('', [Validators.required]),
-      descripcion: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)])
+      descripcion: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
+      precio: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]),
+      aplicaIva: new FormControl(true),
+      canastaBasica: new FormControl(false)
     });
   }
 

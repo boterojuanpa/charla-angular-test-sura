@@ -1,23 +1,48 @@
- <h1>Registrar Producto</h1>
- <h3>Ejemplo validacion de formularios reactivos con directiva</h3>
- <form [formGroup]="productoForm" (ngSubmit)="crear()">
-   <div class="row">
-     <div class="col-sm-2">
-       <label>Id:</label>
-     </div>
-     <div class="col-sm-4">
-       <input validar type="text" id="idProducto" name="idProducto" placeholder="Id producto" class="form-control"
-         formControlName="id">
-     </div>
-   </div>
-   <div class="row">
-     <div class="col-sm-2">
-       <label>Descripción:</label>
-     </div>
-     <div class="col-sm-4">
-       <input validar type="text" id="descripcionProducto" name="descripcion" placeholder="Descripción producto"
-         class="form-control" formControlName="descripcion">
-     </div>
-   </div>
-   <input type="submit" value="Enviar">
- </form>
+<h1>Registrar Producto</h1>
+<h3>Ejemplo validacion de formularios reactivos con directiva</h3>
+<form [formGroup]="productoForm" (ngSubmit)="crear()">
+  <div class="row">
+    <div class="col-sm-2">
+      <label>Id:</label>
+    </div>
+    <div class="col-sm-4">
+      <input validar type="text" id="idProducto" name="idProducto" placeholder="Id producto" class="form-control"
+        formControlName="id">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2">
+      <label>Descripción:</label>
+    </div>
+    <div class="col-sm-4">
+      <input validar type="text" id="descripcionProducto" name="descripcion" placeholder="Descripción producto"
+        class="form-control" formControlName="descripcion">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2">
+      <label>Precio:</label>
+    </div>
+    <div class="col-sm-4">
+      <input validar type="text" id="precio" name="precio" placeholder="Precio producto" class="form-control"
+        formControlName="precio">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2">
+      <label>Aplica IVA:</label>
+    </div>
+    <div class="col-sm-4">
+      <input type="checkbox" id="aplicaIva" name="aplicaIva" class="form-control" formControlName="aplicaIva">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-2">
+      <label>Canasta básica :</label>
+    </div>
+    <div class="col-sm-4">
+      <input type="checkbox" id="canastaBasica" name="canastaBasica" class="form-control" formControlName="canastaBasica">
+    </div>
+  </div>
+  <input type="submit" value="Enviar">
+</form>

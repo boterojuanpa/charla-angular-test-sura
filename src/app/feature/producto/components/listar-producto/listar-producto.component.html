@@ -1,7 +1,7 @@
 <div id="productos">
   <ul class="productos">
     <li *ngFor="let item of listaProductos | async">
-      <span>{{item.id}}</span> {{item.descripcion}}
+      <span>{{item.id}}</span> {{item.descripcion}} - {{item.precio}}
     </li>
   </ul>
 </div>
