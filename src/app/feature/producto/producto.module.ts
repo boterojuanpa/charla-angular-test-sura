@@ -17,5 +17,6 @@ import { SharedModule } from '@shared/shared.module';
     ProductoRoutingModule,
     SharedModule
   ]
+  
 })
 export class ProductoModule { }

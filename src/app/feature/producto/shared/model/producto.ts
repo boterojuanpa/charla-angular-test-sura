@@ -1,4 +1,5 @@
-
+const IVA_PRODUCTO_CANASTA_BASICA = 0.05;
+const IVA_PRODUCTO_GENERAL = 0.19;
 export class Producto {
     id: string;
     descripcion: string;
@@ -19,7 +20,8 @@ export class Producto {
 
     public calcularIva() {
         if (this.aplicaIva) {
-          this.valorIva = this.precio * 0.19;
+          let ivaAplicar = this.canastaBasica ? IVA_PRODUCTO_CANASTA_BASICA : IVA_PRODUCTO_GENERAL;
+          this.valorIva = this.precio * ivaAplicar;
         }
       }
 }

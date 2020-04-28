@@ -3,6 +3,7 @@ import { ProductoService } from '../../shared/service/producto.service';
 import { Producto } from '../../shared/model/producto';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
+const PRECIO_MAXIMO_CANASTA = 25000;
 @Component({
   selector: 'app-crear-producto',
   templateUrl: './crear-producto.component.html',
@@ -10,6 +11,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class CrearProductoComponent implements OnInit {
   productoForm: FormGroup;
+
+  public mensajeError =  "El precio del producto debe ser menor a 25000" ;
+
   constructor(protected productoServices: ProductoService) { }
 
   ngOnInit() {
@@ -35,6 +39,9 @@ export class CrearProductoComponent implements OnInit {
       aplicaIva: new FormControl(true),
       canastaBasica: new FormControl(false)
     });
+  }
+  public esCanastaYPrecioEsMayorAPermitido(){
+    return this.productoForm.get('canastaBasica').value && this.productoForm.get('precio').value > PRECIO_MAXIMO_CANASTA;
   }
 
 }

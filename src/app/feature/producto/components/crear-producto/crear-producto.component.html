@@ -44,5 +44,13 @@
       <input type="checkbox" id="canastaBasica" name="canastaBasica" class="form-control" formControlName="canastaBasica">
     </div>
   </div>
+  <div class="row" *ngIf = "esCanastaYPrecioEsMayorAPermitido()">
+    <div class="col-sm-4">
+      <span id="mensajeCanasta">
+        {{mensajeError}}
+      </span>
+    </div>
+  </div>
+  
   <input type="submit" value="Enviar">
 </form>

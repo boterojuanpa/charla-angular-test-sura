@@ -19,13 +19,15 @@ export class ProductoService {
   }
 
   public guardar(producto: Producto) {
+    if(producto.canastaBasica && producto.precio > 25000){
+      throw new Error("No se puede guardar productos que hagan parte de la canasta y cuesten mas de 25000");
+    }
     producto.calcularIva();
     return this.http.doPost<Producto, boolean>(`${environment.endpoint}/productos`, producto);
   }
 
-
-
   public eliminar(producto: Producto) {
     return this.http.doDelete<Producto, boolean>(`${environment.endpoint}/productos/${producto.id}`);
   }
+  
 }
