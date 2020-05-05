@@ -15,6 +15,10 @@ const routes: Routes = [
         component: CrearProductoComponent
       },
       {
+        path: 'crear/:id',
+        component: CrearProductoComponent
+      },
+      {
         path: 'listar',
         component: ListarProductoComponent
       }

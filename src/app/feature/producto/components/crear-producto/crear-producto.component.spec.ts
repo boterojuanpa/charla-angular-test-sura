@@ -2,21 +2,30 @@ import { TestBed, ComponentFixture } from "@angular/core/testing"
 import { CrearProductoComponent } from './crear-producto.component'
 import { ProductoService } from '@producto/shared/service/producto.service'
 import { HttpService } from '@core/services/http.service'
-import { HttpClientTestingModule } from '@angular/common/http/testing'
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing'
 import { ReactiveFormsModule } from '@angular/forms'
 import { SharedModule } from '@shared/shared.module'
 import { By } from '@angular/platform-browser'
+import { environment } from 'src/environments/environment'
+import { ActivatedRouteStub } from './active-route-stub'
+import { ActivatedRoute } from '@angular/router'
 
 fdescribe("Pruebas componente crear producto", ()=>{
 
     let  fixture : ComponentFixture<CrearProductoComponent>;
     let component: CrearProductoComponent;
 
+    let routerStub = new ActivatedRouteStub();
+
+
     beforeEach(()=>{
         TestBed.configureTestingModule({
             imports: [HttpClientTestingModule, ReactiveFormsModule, SharedModule],
             declarations: [CrearProductoComponent] ,
-            providers: [ProductoService, HttpService]
+            providers: [ProductoService, HttpService,
+                {
+                    provide: ActivatedRoute, useValue: routerStub
+                }]
         })
 
         fixture = TestBed.createComponent(CrearProductoComponent);
@@ -103,6 +112,54 @@ fdescribe("Pruebas componente crear producto", ()=>{
 
         expect(erroresActivos[2].nativeElement.textContent).toBe("Mínimo 2 caracteres, actual 1");
     })
+
+    it("Al llenar los datos del formulario y dar Clic en enviar debería enviar el producto a la API y mostar el mensaje de producto creado", ()=>{
+
+
+        spyOn(window,"alert");
+
+        let inputID : HTMLInputElement = fixture.nativeElement.querySelector("#idProducto");
+        let inputDescripcion : HTMLInputElement = fixture.nativeElement.querySelector("#descripcionProducto");
+        let inputPrecio : HTMLInputElement = fixture.nativeElement.querySelector("#precio");
+        let inputAplicaIva : HTMLInputElement = fixture.nativeElement.querySelector("#aplicaIva");
+        let inputCanastaBasica : HTMLInputElement = fixture.nativeElement.querySelector("#canastaBasica");
+        let botonEnviar : HTMLInputElement = fixture.nativeElement.querySelector("#botonEnviar");
+
+        inputID.value = "2";
+        inputDescripcion.value = "Carne";
+        inputPrecio.value = "21000";
+        inputAplicaIva.checked = true;
+        inputCanastaBasica.checked = true;
+
+        inputID.dispatchEvent(new Event('input'));
+        inputDescripcion.dispatchEvent(new Event('input'));
+        inputPrecio.dispatchEvent(new Event('input'));
+        inputAplicaIva.dispatchEvent(new Event('change'));
+        inputCanastaBasica.dispatchEvent(new Event('change'));
+
+        fixture.detectChanges();
+
+        botonEnviar.click();
+
+        const httpTestingController = TestBed.inject(HttpTestingController)
+
+        const request = httpTestingController.expectOne(`${environment.endpoint}/productos`);
+
+        expect(request.request.method).toEqual('POST');
+        expect(request.request.body.id).toEqual('2');
+        expect(request.request.body.precio).toEqual('21000');
+
+        request.flush("");
+
+        expect(window.alert).toHaveBeenCalledWith("producto creado")
+
+
+
+
+
+    })
+
+
 
 
 })

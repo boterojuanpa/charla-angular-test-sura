@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductoService } from '../../shared/service/producto.service';
 import { Producto } from '../../shared/model/producto';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 const PRECIO_MAXIMO_CANASTA = 25000;
 @Component({
@@ -14,10 +15,13 @@ export class CrearProductoComponent implements OnInit {
 
   public mensajeError =  "El precio del producto debe ser menor a 25000" ;
 
-  constructor(protected productoServices: ProductoService) { }
+  constructor(protected productoServices: ProductoService, protected route: ActivatedRoute) { }
 
   ngOnInit() {
     this.construirFormularioProducto();
+    this.route.paramMap.subscribe((param)=>{
+      this.productoForm.controls.id.setValue(param.get('id'));
+    })
   }
 
   crear() {
